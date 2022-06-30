@@ -420,3 +420,327 @@ Ok, one module loaded.
 2022-06-16 16:14:57.216798537
 >>> :q
 Leaving GHCi.
+GHCi, version 9.0.2: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /home/misaki/bprog2022/.ghci
+2022-06-23 14:54:45.591240575
+>>> :i Num
+type Num :: * -> Constraint
+class Num a where
+  (+) :: a -> a -> a
+  (-) :: a -> a -> a
+  (*) :: a -> a -> a
+  negate :: a -> a
+  abs :: a -> a
+  signum :: a -> a
+  fromInteger :: Integer -> a
+  {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+  	-- Defined in ‘GHC.Num’
+instance Num NominalDiffTime
+  -- Defined in ‘time-1.9.3:Data.Time.Clock.Internal.NominalDiffTime’
+instance Num DiffTime
+  -- Defined in ‘time-1.9.3:Data.Time.Clock.Internal.DiffTime’
+instance Num Word -- Defined in ‘GHC.Num’
+instance Num Integer -- Defined in ‘GHC.Num’
+instance Num Int -- Defined in ‘GHC.Num’
+instance Num Float -- Defined in ‘GHC.Float’
+instance Num Double -- Defined in ‘GHC.Float’
+2022-06-23 14:56:29.1610781
+>>> 1 == 2
+False
+2022-06-23 15:06:14.013837784
+>>> 1 <2
+True
+2022-06-23 15:06:27.137942235
+>>> 1 < 1
+False
+2022-06-23 15:06:35.562064333
+>>> 1 <= 2
+True
+2022-06-23 15:06:43.328901566
+>>> 1 >- 2
+
+<interactive>:6:3: error:
+    • Variable not in scope: (>-) :: t0 -> t1 -> t
+    • Perhaps you meant one of these:
+        ‘-’ (imported from Prelude), ‘>=’ (imported from Prelude),
+        ‘>>’ (imported from Prelude)
+2022-06-23 15:07:09.036362468
+>>> 1 >= 2
+False
+2022-06-23 15:07:20.17813679
+>>> 'a' < 'b'
+True
+2022-06-23 15:11:20.986852698
+>>> 'a' < 'B'
+False
+2022-06-23 15:11:33.65408997
+>>> '' < 'a'
+
+<interactive>:10:1: error:
+    Parser error on `''`
+    Character literals may not be empty
+2022-06-23 15:12:12.592831906
+>>> 'ab' < 'b'
+
+<interactive>:11:1: error:
+    • Syntax error on 'ab'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'ab'
+2022-06-23 15:12:58.48726361
+>>> 1 /= 2
+True
+2022-06-23 15:16:17.487027079
+>>> 1 /= 1
+False
+2022-06-23 15:16:23.112193829
+>>> info sbd
+
+<interactive>:14:1: error: Variable not in scope: info :: t0 -> t
+
+<interactive>:14:6: error:
+    • Variable not in scope: sbd
+    • Perhaps you meant ‘snd’ (imported from Prelude)
+2022-06-23 15:30:18.856585696
+>>> info abs
+
+<interactive>:15:1: error:
+    Variable not in scope: info :: (a0 -> a0) -> t
+2022-06-23 15:30:27.492216221
+>>> abs
+
+<interactive>:16:1: error:
+    • No instance for (Show (Integer -> Integer))
+        arising from a use of ‘print’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command: print it
+2022-06-23 15:30:53.994908009
+>>> abs (-234)
+234
+2022-06-23 15:34:50.081888906
+>>> GHCi, version 9.0.2: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /home/misaki/bprog2022/.ghci
+2022-06-30 14:57:33.730969011
+>>> [ x ^ 2 | x <- [1 .. 5] ]
+[1,4,9,16,25]
+2022-06-30 15:01:53.545523782
+>>> map (^2) [1..5]
+[1,4,9,16,25]
+2022-06-30 15:11:32.681442399
+>>> [ x * 2 | x <- [1..5] ]
+[2,4,6,8,10]
+2022-06-30 15:12:04.752218176
+>>> [x `div` 2 | x <- [1..5]
+
+<interactive>:4:25: error:
+    parse error (possibly incorrect indentation or mismatched brackets)
+2022-06-30 15:13:32.878728805
+>>> [ x `div` 2 | x <- [1..5]]
+[0,1,1,2,2]
+2022-06-30 15:14:11.147502267
+>>> [ x `divMod` 2 | x <- [1..5]]
+[(0,1),(1,0),(1,1),(2,0),(2,1)]
+2022-06-30 15:16:15.533404418
+>>> [ (x, y) | x <- "abc" , y <- [4,5] 
+
+<interactive>:7:36: error:
+    parse error (possibly incorrect indentation or mismatched brackets)
+2022-06-30 15:21:14.21639754
+>>> [ (x, y) | x <- "abc" , y <- [4,5] ]
+[('a',4),('a',5),('b',4),('b',5),('c',4),('c',5)]
+2022-06-30 15:21:28.690822142
+>>> [ (x, y) | y <- [4,5], x <- [abc]
+
+<interactive>:9:34: error:
+    parse error (possibly incorrect indentation or mismatched brackets)
+2022-06-30 15:22:38.253388912
+>>> [ (x, y) | y <- [4,5], x <- [abc] ]
+
+<interactive>:10:30: error:
+    • Variable not in scope: abc
+    • Perhaps you meant ‘abs’ (imported from Prelude)
+2022-06-30 15:23:11.507015086
+>>> [ (x, y) | y <- [4,5], x <- "abc" 
+
+<interactive>:11:35: error:
+    parse error (possibly incorrect indentation or mismatched brackets)
+2022-06-30 15:26:02.920845249
+>>> [ (x, y) | y <- [4,5], x <- "abc"]
+[('a',4),('b',4),('c',4),('a',5),('b',5),('c',5)]
+2022-06-30 15:26:33.094490088
+>>> :e src/First.hs
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs `div` length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+  17  
+  18  myinit :: [a] -> [a]
+  19  myinit (x:[]) = []
+  20  myinit (x:xs) = x : (init xs)
+  21  
+  22  myconcat :: [[a]] ->
+Ok, no modules loaded.
+2022-06-30 15:29:38.727564323
+>>> :l src/First.hs
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+
+src/First.hs:22:21: error:
+    parse error (possibly incorrect indentation or mismatched brackets)
+   |
+22 | myconcat :: [[a]] ->
+   |                     ^
+Failed, no modules loaded.
+2022-06-30 15:29:38.762418384
+>>> :e src/First.hs
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs `div` length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+  17  
+  18  myinit :: [a] -> [a]
+  19  myinit (x:[]) = []
+  20  myinit (x:xs) = x : (init xs)
+  21  
+  22  myconcat :: [[a]] ->
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+
+src/First.hs:22:21: error:
+    parse error (possibly incorrect indentation or mismatched brackets)
+   |
+22 | myconcat :: [[a]] ->
+   |                     ^
+Failed, no modules loaded.
+2022-06-30 15:30:09.477632399
+>>> :l src/First.hs
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+
+src/First.hs:22:21: error:
+    parse error (possibly incorrect indentation or mismatched brackets)
+   |
+22 | myconcat :: [[a]] ->
+   |                     ^
+Failed, no modules loaded.
+2022-06-30 15:30:09.57452148
+>>> :e src/First.hs
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs `div` length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+  17  
+  18  myinit :: [a] -> [a]
+  19  myinit (x:[]) = []
+  20  myinit (x:xs) = x : (init xs)
+  21  
+  22  myconcat :: [[a]] -> [a]
+  23  myconcat xss = [ x | xs <- xss, x <- xs]
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-30 15:31:40.547176586
+>>> :l src/First.hs
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-30 15:31:40.584323009
+>>> myconcat [[1,2,3],[4,5],[6.7.8.9]]
+
+<interactive>:19:1: error:
+    • Non type-variable argument in the constraint: Fractional (b -> c)
+      (Use FlexibleContexts to permit this)
+    • When checking the inferred type
+        it :: forall {b} {c} {a}.
+              (Fractional (b -> c), Fractional (a -> b), Num (a -> c)) =>
+              [a -> c]
+2022-06-30 15:33:20.445747364
+>>> [ 1 | _ <- [1 .. 5] ]
+[1,1,1,1,1]
+2022-06-30 15:47:37.825999458
+>>> l scr/First.hs
+
+<interactive>:21:7: error: Not in scope: ‘First.hs’
+2022-06-30 15:51:08.808998775
+>>> l src/First.hs
+
+<interactive>:22:7: error: Not in scope: ‘First.hs’
+2022-06-30 15:52:41.422938626
+>>> :e src/First.hs
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs `div` length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+  17  
+  18  myinit :: [a] -> [a]
+  19  myinit (x:[]) = []
+  20  myinit (x:xs) = x : (init xs)
+  21  
+  22  myconcat :: [[a]] -> [a]
+  23  myconcat xss = [ x | xs <- xss, x <- xs]
+  24  
+  25  mylength :: [a] -> Int
+  26  mylength xs = sum [ 1 | _ <- xs]
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-30 15:54:10.384504284
+>>> :l src/First.hs
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-30 15:54:10.482440329
+>>> mylength ['a' .. 'z']
+26
+2022-06-30 15:55:51.276482108
+>>> ['a' .. 'z']
+"abcdefghijklmnopqrstuvwxyz"
+2022-06-30 15:56:21.685886605
+>>> ['あ' ..'ん']
+"\12354\12355\12356\12357\12358\12359\12360\12361\12362\12363\12364\12365\12366\12367\12368\12369\12370\12371\12372\12373\12374\12375\12376\12377\12378\12379\12380\12381\12382\12383\12384\12385\12386\12387\12388\12389\12390\12391\12392\12393\12394\12395\12396\12397\12398\12399\12400\12401\12402\12403\12404\12405\12406\12407\12408\12409\12410\12411\12412\12413\12414\12415\12416\12417\12418\12419\12420\12421\12422\12423\12424\12425\12426\12427\12428\12429\12430\12431\12432\12433\12434\12435"
+2022-06-30 15:56:59.045513788
+>>> putStrLn it
+あぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをん
+2022-06-30 15:57:15.154007155
+>>> :q
+Leaving GHCi.
